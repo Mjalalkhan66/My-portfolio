@@ -11,7 +11,7 @@ import MyProjects from "./components/MyProjects";
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/My-portfolio">   {/* 👈 IMPORTANT */}
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} /> {/* Default route */}
