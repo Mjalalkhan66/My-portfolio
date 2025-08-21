@@ -1,36 +1,41 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
+import { useOutletContext } from "react-router-dom";
 
-export default function MyProjects({ darkMode }) {
+export default function MyProjects() {
+  const { darkMode } = useOutletContext();
+
   const projects = [
     {
       title: "BackgroundChanger",
-      description: "A Good mini project , user can choose background of his own choice upon clicking on the buttons below ",
+      description:
+        "A Good mini project , user can choose background of his own choice upon clicking on the buttons below ",
       github: "https://github.com/Mjalalkhan66/reactjs.git",
-      video: "bgchanger.mp4", 
+      video: "bgchanger.mp4",
     },
     {
       title: "Password Generator",
-      description: "User can generate a random strong password , he can coose length of password of his choice , he can include characters and numbers if he wants to",
+      description:
+        "User can generate a random strong password , he can choose length of password of his choice , he can include characters and numbers if he wants to",
       github: "https://github.com/Mjalalkhan66/reactjs.git",
       video: "passgen.mp4",
     },
     {
       title: "Todo",
-      description: "Todo app , user can store his todos here and can access later",
+      description:
+        "Todo app , user can store his todos here and can access later",
       github: "https://github.com/Mjalalkhan66/reactjs.git",
       video: "todo.mp4",
     },
-   
   ];
 
   return (
-    <section className="w-full min-h-screen px-6 py-16">
+    <section className="w-full py-16 px-6">
       <h2 className="text-4xl font-bold text-center mb-12 text-blue-600">
         Explore My Projects
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
         {projects.map((project, index) => (
           <div
             key={index}
@@ -41,17 +46,14 @@ export default function MyProjects({ darkMode }) {
             <h3 className="text-2xl font-semibold mb-4">{project.title}</h3>
             <p className="mb-4">{project.description}</p>
 
-            {/* Video preview */}
             <div className="mb-4">
               <video
                 src={project.video}
                 controls
-                autoPlay
-                className="w-full h-48 rounded-xl object-cover"
+                className="w-full h-56 rounded-xl object-cover"
               />
             </div>
 
-            {/* GitHub link */}
             <a
               href={project.github}
               target="_blank"

@@ -31,46 +31,22 @@ export default function App() {
 
         {/* Desktop Nav */}
         <ul className="hidden md:flex space-x-8 text-lg">
-          <li>
-            <Link
-              to="/"
-              className="hover:text-blue-400 transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              className="hover:text-blue-400 transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/services"
-              className="hover:text-blue-400 transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            >
-              Services
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/myprojects"
-              className="hover:text-blue-400 transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            >
-              MyProjects
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              className="hover:text-blue-400 transform hover:scale-110 transition-transform duration-300 ease-in-out"
-            >
-              Contact
-            </Link>
-          </li>
+          {["/", "/about", "/services", "/myprojects", "/contact"].map(
+            (path, i) => (
+              <li key={i}>
+                <Link
+                  to={path}
+                  className="hover:text-blue-600 transform hover:scale-130 transition-transform duration-300 ease-in-out"
+                >
+                  {path === "/"
+                    ? "Home"
+                    : path.replace("/", "").replace(/^\w/, (c) =>
+                        c.toUpperCase()
+                      )}
+                </Link>
+              </li>
+            )
+          )}
         </ul>
 
         {/* Mobile Menu Button */}
@@ -97,48 +73,27 @@ export default function App() {
 
       {/* Mobile Nav Links */}
       {menuOpen && (
-        <div className="md:hidden flex flex-col items-center space-y-4 py-6 bg-opacity-90 shadow-lg">
-          <Link
-            to="/"
-            className="hover:text-blue-400 text-lg"
-            onClick={() => setMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="hover:text-blue-400 text-lg"
-            onClick={() => setMenuOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            to="/services"
-            className="hover:text-blue-400 text-lg"
-            onClick={() => setMenuOpen(false)}
-          >
-            Services
-          </Link>
-          <Link
-            to="/myprojects"
-            className="hover:text-blue-400 text-lg"
-            onClick={() => setMenuOpen(false)}
-          >
-            MyProjects
-          </Link>
-          <Link
-            to="/contact"
-            className="hover:text-blue-400 text-lg"
-            onClick={() => setMenuOpen(false)}
-          >
-            Contact
-          </Link>
+        <div className="md:hidden flex flex-col items-center space-y-4 py-6 bg-opacity-95 shadow-lg">
+          {["/", "/about", "/services", "/myprojects", "/contact"].map(
+            (path, i) => (
+              <Link
+                key={i}
+                to={path}
+                className="hover:text-blue-400 text-lg"
+                onClick={() => setMenuOpen(false)}
+              >
+                {path === "/"
+                  ? "Home"
+                  : path.replace("/", "").replace(/^\w/, (c) => c.toUpperCase())}
+              </Link>
+            )
+          )}
         </div>
       )}
 
       {/* Page Content */}
-      <main className="flex-1 w-full h-full overflow-hidden px-6 py-10">
-        <Outlet />
+      <main className="flex-1 w-full px-6 py-10">
+        <Outlet context={{ darkMode }} />
       </main>
 
       {/* Footer */}

@@ -4,7 +4,7 @@ import { FaEnvelope, FaPhone, FaWhatsapp, FaLinkedin } from "react-icons/fa";
 export default function Contact() {
   return (
     <section className="w-screen py-10 flex items-center justify-center">
-      <div className="w-full max-w-5xl px-6 mx-auto">
+      <div className="w-screen max-w-5xl px-6 mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">
           Get in Touch , Get Your Project Made
         </h2>
