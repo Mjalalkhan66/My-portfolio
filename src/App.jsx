@@ -19,12 +19,13 @@ export default function App() {
     >
       {/* Navbar */}
       <nav
-        className={`flex items-center justify-between px-6 py-4 shadow-lg transition-colors duration-500 ${
+        className={`flex items-center justify-between w-full px-6 py-4 shadow-lg transition-colors duration-500 ${
           darkMode
             ? "bg-gradient-to-r from-purple-800 to-blue-800"
             : "bg-gradient-to-r from-yellow-200 to-cyan-200"
         }`}
       >
+        {/* Logo */}
         <div className="flex items-center space-x-3">
           <img src="my logo.png" alt="Logo" className="w-10 h-10 rounded-full" />
         </div>
@@ -36,7 +37,7 @@ export default function App() {
               <li key={i}>
                 <Link
                   to={path}
-                  className="hover:text-blue-600 transform hover:scale-130 transition-transform duration-300 ease-in-out"
+                  className="hover:text-blue-600 transform hover:scale-105 transition-transform duration-300 ease-in-out"
                 >
                   {path === "/"
                     ? "Home"
@@ -73,7 +74,7 @@ export default function App() {
 
       {/* Mobile Nav Links */}
       {menuOpen && (
-        <div className="md:hidden flex flex-col items-center space-y-4 py-6 bg-opacity-95 shadow-lg">
+        <div className="md:hidden flex flex-col items-center space-y-4 py-6 bg-opacity-95 shadow-lg w-full">
           {["/", "/about", "/services", "/myprojects", "/contact"].map(
             (path, i) => (
               <Link
@@ -84,7 +85,9 @@ export default function App() {
               >
                 {path === "/"
                   ? "Home"
-                  : path.replace("/", "").replace(/^\w/, (c) => c.toUpperCase())}
+                  : path.replace("/", "").replace(/^\w/, (c) =>
+                      c.toUpperCase()
+                    )}
               </Link>
             )
           )}
@@ -92,13 +95,13 @@ export default function App() {
       )}
 
       {/* Page Content */}
-      <main className="flex-1 w-full px-6 py-10">
+      <main className="flex-1 w-full px-6 py-16">
         <Outlet context={{ darkMode }} />
       </main>
 
       {/* Footer */}
       <footer
-        className={`px-6 py-4 flex flex-col md:flex-row items-center justify-between transition-colors duration-500 ${
+        className={`w-full px-6 py-4 flex flex-col md:flex-row items-center justify-between transition-colors duration-500 ${
           darkMode
             ? "bg-gradient-to-r from-blue-800 to-purple-800"
             : "bg-gradient-to-r from-yellow-200 to-cyan-200"
