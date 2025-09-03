@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jalal's Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("YOUR_PUBLIC_KEY");
+      })();
+    </script>
+    <style>
+      /* CSS Variables for Theming */
+      :root {
+        /* Light Theme */
+        --bg-gradient-light: linear-gradient(135deg, #e0f7fa, #80deea, #ffffff);
+        --text-light: #222;
+        --link-light: #1565c0;
+        --h1-light: #6a1b9a;
+        --h2-light: #4527a0;
+        --h3-light: #283593;
+        --p-light: #263238;
+        --nav-bg-light: rgba(255, 255, 255, 0.95);
+        --card-bg-light: rgba(255, 255, 255, 0.85);
+        --form-bg-light: rgba(255, 255, 255, 0.9);
+        --button-text-light: white;
+
+        /* Dark Theme - Improved Contrast */
+        --bg-gradient-dark: linear-gradient(135deg, #2c3e50, #1a1a2e);
+        --text-dark: #f0f0f0;
+        --link-dark: #4fc3f7;
+        --h1-dark: #ffffff;
+        --h2-dark: #e91e63;
+        --h3-dark: #ff5722;
+        --p-dark: #e0e0e0;
+        --nav-bg-dark: rgba(30, 30, 30, 0.95);
+        --card-bg-dark: rgba(40, 40, 40, 0.85);
+        --form-bg-dark: rgba(45, 45, 45, 0.9);
+        --button-text-dark: white;
+
+        /* Common Variables */
+        --transition: all 0.3s ease;
+        --border-radius: 10px;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.7;
+        transition: var(--transition);
+        background: var(--bg-gradient-light);
+        color: var(--text-light);
+        min-height: 100vh;
+        font-size: 18px;
+      }
+
+      body.dark-mode {
+        background: var(--bg-gradient-dark);
+        color: var(--text-dark);
+      }
+
+      a {
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      /* Navigation */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2.5rem;
+        background: var(--nav-bg-light);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .dark-mode .navbar {
+        background: var(--nav-bg-dark);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      .navbar img {
+        height: 55px;
+        transition: var(--transition);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .navbar a {
+        color: var(--link-light);
+        font-weight: 600;
+        position: relative;
+        font-size: 1.1rem;
+      }
+
+      .dark-mode .navbar a {
+        color: var(--link-dark);
+      }
+
+      .navbar a::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--link-light);
+        transition: var(--transition);
+      }
+
+      .dark-mode .navbar a::after {
+        background: var(--link-dark);
+      }
+
+      .navbar a:hover::after {
+        width: 100%;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.8rem;
+        margin-left: 1.5rem;
+        transition: var(--transition);
+        color: var(--text-light);
+      }
+
+      .dark-mode .theme-toggle {
+        color: var(--text-dark);
+      }
+
+      /* Mobile Navigation */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--text-light);
+      }
+
+      .dark-mode .mobile-menu-btn {
+        color: var(--text-dark);
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        padding: 5rem 0;
+      }
+
+      .profile-img {
+        width: 375px;
+        height: 375px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 3rem;
+        border: 5px solid;
+        border-color: var(--h1-light);
+        transition: var(--transition);
+        box-shadow: var(--box-shadow);
+      }
+
+      .dark-mode .profile-img {
+        border-color: var(--h2-dark);
+      }
+
+      h1 {
+        color: var(--h1-light);
+        margin-bottom: 1.5rem;
+        font-size: 3.2rem;
+        transition: var(--transition);
+      }
+
+      .dark-mode h1 {
+        color: var(--h1-dark);
+      }
+
+      h2 {
+        color: var(--h2-light);
+        margin: 2rem 0 1.5rem;
+        font-size: 2.5rem;
+        transition: var(--transition);
+      }
+
+      .dark-mode h2 {
+        color: var(--h2-dark);
+      }
+
+      h3 {
+        color: var(--h3-light);
+        margin: 2rem 0 1.5rem;
+        font-size: 2rem;
+        transition: var(--transition);
+      }
+
+      .dark-mode h3 {
+        color: var(--h3-dark);
+      }
+
+      p {
+        color: var(--p-light);
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+        font-size: 1.2rem;
+      }
+
+      .dark-mode p {
+        color: var(--p-dark);
+      }
+
+      ul {
+        list-style-position: inside;
+        margin-bottom: 2.5rem;
+      }
+
+      li {
+        margin-bottom: 0.8rem;
+        color: var(--p-light);
+        transition: var(--transition);
+        font-size: 1.2rem;
+      }
+
+      .dark-mode li {
+        color: var(--p-dark);
+      }
+
+      /* Services Section */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .service-card {
+        background: var(--card-bg-light);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+        text-align: center;
+      }
+
+      .dark-mode .service-card {
+        background: var(--card-bg-dark);
+      }
+
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .project-card {
+        background: var(--card-bg-light);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .dark-mode .project-card {
+        background: var(--card-bg-dark);
+      }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .project-info {
+        padding: 2rem;
+      }
+
+      video {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: var(--transition);
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+      }
+
+      video:hover {
+        transform: scale(1.03);
+      }
+
+      /* Contact Section */
+      .contact-form {
+        max-width: 700px;
+        margin: 0 auto;
+        background: var(--form-bg-light);
+        padding: 2.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .dark-mode .contact-form {
+        background: var(--form-bg-dark);
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        color: var(--text-light);
+        transition: var(--transition);
+        font-size: 1.2rem;
+        text-align: left;
+      }
+
+      .dark-mode label {
+        color: var(--text-dark);
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: var(--border-radius);
+        font-family: inherit;
+        transition: var(--transition);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--text-light);
+        font-size: 1.1rem;
+      }
+
+      .dark-mode input,
+      .dark-mode textarea {
+        border-color: #555;
+        background: rgba(50, 50, 50, 0.9);
+        color: var(--text-dark);
+      }
+
+      textarea {
+        min-height: 180px;
+        resize: vertical;
+      }
+
+      button[type="submit"] {
+        background: var(--h1-light);
+        color: var(--button-text-light);
+        border: none;
+        padding: 1.2rem 2.5rem;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-weight: 600;
+        transition: var(--transition);
+        font-size: 1.2rem;
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+      }
+
+      .dark-mode button[type="submit"] {
+        background: var(--h2-dark);
+        color: var(--button-text-dark);
+      }
+
+      button[type="submit"]:hover {
+        opacity: 0.9;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Form Status Messages */
+      .form-status {
+        text-align: center;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: var(--border-radius);
+        display: none;
+      }
+
+      .form-status.success {
+        background: #d4edda;
+        color: #155724;
+        display: block;
+      }
+
+      .form-status.error {
+        background: #f8d7da;
+        color: #721c24;
+        display: block;
+      }
+
+      .dark-mode .form-status.success {
+        background: #2e4b2e;
+        color: #a3d6a3;
+      }
+
+      .dark-mode .form-status.error {
+        background: #4b2e2e;
+        color: #ffb3b3;
+      }
+
+      /* Footer */
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 2.5rem;
+        background: var(--nav-bg-light);
+        margin-top: 4rem;
+        transition: var(--transition);
+      }
+
+      .dark-mode .footer {
+        background: var(--nav-bg-dark);
+      }
+
+      .footer p {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer a {
+        color: var(--link-light);
+        font-weight: 600;
+        transition: var(--transition);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .dark-mode .footer a {
+        color: var(--link-dark);
+      }
+
+      .footer a:hover {
+        opacity: 0.8;
+        transform: translateY(-3px);
+      }
+
+      /* Responsive Design - Improved */
+      @media (max-width: 1024px) {
+        .container {
+          width: 95%;
+          padding: 0 15px;
+        }
+
+        section {
+          padding: 70px 0;
+        }
+
+        .profile-img {
+          width: 320px;
+          height: 320px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        body {
+          font-size: 16px;
+        }
+
+        h1 {
+          font-size: 2.8rem;
+        }
+
+        h2 {
+          font-size: 2.2rem;
+        }
+
+        h3 {
+          font-size: 1.8rem;
+        }
+
+        .profile-img {
+          width: 300px;
+          height: 300px;
+        }
+
+        .navbar {
+          padding: 1rem 1.5rem;
+        }
+
+        .nav-links {
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 80px;
+          left: -100%;
+          width: 100%;
+          height: calc(100vh - 80px);
+          background: var(--nav-bg-light);
+          flex-direction: column;
+          justify-content: flex-start;
+          padding-top: 2rem;
+          transition: left 0.3s ease;
+          gap: 2rem;
+        }
+
+        .dark-mode .nav-links {
+          background: var(--nav-bg-dark);
+        }
+
+        .nav-links.active {
+          left: 0;
+        }
+
+        .navbar {
+          padding: 1rem;
+        }
+
+        .navbar img {
+          height: 45px;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        h3 {
+          font-size: 1.6rem;
+        }
+
+        .profile-img {
+          width: 280px;
+          height: 280px;
+        }
+
+        .services-grid,
+        .projects-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .service-card,
+        .project-card {
+          padding: 1.5rem;
+        }
+
+        .contact-form {
+          padding: 1.5rem;
+        }
+
+        .footer {
+          flex-direction: column;
+          text-align: center;
+          gap: 1.5rem;
+          padding: 1.5rem;
+        }
+
+        .footer-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          font-size: 15px;
+        }
+
+        .navbar a {
+          font-size: 1.1rem;
+        }
+
+        .profile-img {
+          width: 250px;
+          height: 250px;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        h3 {
+          font-size: 1.4rem;
+        }
+
+        p,
+        li {
+          font-size: 1.1rem;
+        }
+
+        section {
+          padding: 50px 0;
+        }
+
+        .hero {
+          padding: 3rem 0;
+        }
+
+        .service-card,
+        .project-card {
+          padding: 1.2rem;
+        }
+
+        .project-info {
+          padding: 1.2rem;
+        }
+
+        input,
+        textarea {
+          padding: 0.8rem;
+          font-size: 1rem;
+        }
+
+        button[type="submit"] {
+          padding: 1rem 2rem;
+          width: 100%;
+          max-width: 200px;
+        }
+
+        .footer a {
+          font-size: 1rem;
+        }
+
+        ul {
+          padding-left: 1rem;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .profile-img {
+          width: 220px;
+          height: 220px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.6rem;
+        }
+
+        h3 {
+          font-size: 1.3rem;
+        }
+
+        .navbar {
+          padding: 0.8rem;
+        }
+
+        .navbar img {
+          height: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <img src="my logo.png" alt="Jalal's Logo" />
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="My Resume.pdf" target="_blank">My Resume</a>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Hero/About Section -->
+      <section id="about" class="hero">
+        <img src="me.jpg" alt="Muhammad Jalal Khan" class="profile-img" />
+        <h1>Something about me</h1>
+        <p>
+          I am Muhammad Jalal Khan, student of computer systems engineering at
+          University Of Engineering And Technology Peshawar, A Front-end ReactJs
+          website developer.
+        </p>
+
+        <h2>Some Areas I am good at</h2>
+        <ul>
+          <li>HTML, CSS</li>
+          <li>Javascript ES6/ ReactJs</li>
+          <li>Responsiveness and good UI using Tailwind with ReactJs</li>
+          <li>C/C++</li>
+        </ul>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services">
+        <h1>My Services</h1>
+        <h3>Will provide services as</h3>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <p>
+              Good UI and Responsive website using HTML, CSS with functionality
+              via JavaScript
+            </p>
+          </div>
+          <div class="service-card">
+            <p>Single page website using ReactJs</p>
+          </div>
+          <div class="service-card">
+            <p>Tailwind integration for advance styles and Responsiveness</p>
+          </div>
+          <div class="service-card">
+            <p>Problem solving via C++</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects">
+        <h1>Experience some of my projects</h1>
+        <h3>Some projects done with ReactJs and tailwindcss</h3>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <video src="passgen.mp4" controls muted playsinline loop></video>
+            <div class="project-info">
+              <p>
+                Password generator app, user can generate a strong password with
+                combination of special characters and numbers
+              </p>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <video src="bgchanger.mp4" controls muted playsinline loop></video>
+            <div class="project-info">
+              <p>
+                Background changer app, user can choose background of his choice
+                by just clicking button
+              </p>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <video src="todo.mp4" controls muted playsinline loop></video>
+            <div class="project-info">
+              <p>
+                Todo list app, where user can list his upcoming tasks which he
+                can edit and can linethrough once done and delete then
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact">
+        <h1>Get In Touch</h1>
+        <ul>
+          <li>phone / whatsapp : 03159035669</li>
+          <li>Email : jk3434048@gmail.com</li>
+        </ul>
+        <div id="formStatus" class="form-status"></div>
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="project">Explain your project:</label>
+            <textarea id="project" name="project" required></textarea>
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>@MjalalkhanAllrightsreseved25</p>
+      <div class="footer-links">
+        <a
+          href="https://www.linkedin.com/in/muhammad-jalal-khan-999950321/"
+          target="_blank"
+          >LinkedIn</a
+        >
+        <a href="https://www.github.com/Mjalalkhan66" target="_blank">GitHub</a>
+        <a href="https://www.Facebook.com/M jalal khan" target="_blank"
+          >Facebook</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      // Theme Toggle Functionality
+      const themeToggle = document.getElementById("themeToggle");
+      const body = document.body;
+
+      // Check for saved theme preference or respect OS preference
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        body.classList.add("dark-mode");
+        themeToggle.textContent = "☀️";
+      }
+
+      themeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+          themeToggle.textContent = "☀️";
+        } else {
+          localStorage.setItem("theme", "light");
+          themeToggle.textContent = "🌙";
+        }
+      });
+
+      // Mobile menu functionality
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const navLinks = document.getElementById("navLinks");
+      const navItems = document.querySelectorAll(".nav-link");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        mobileMenuBtn.textContent = navLinks.classList.contains("active")
+          ? "✕"
+          : "☰";
+      });
+
+      // Close mobile menu when clicking on a link
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          mobileMenuBtn.textContent = "☰";
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 100,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Auto-play videos when they are in viewport (with improved mobile handling)
+      const videos = document.querySelectorAll("video");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Only autoplay on non-mobile devices or if user allows
+              if (window.innerWidth > 768) {
+                entry.target.play().catch((e) => {
+                  console.log("Autoplay prevented:", e);
+                });
+              }
+            } else {
+              entry.target.pause();
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      videos.forEach((video) => {
+        // Add playsinline attribute for better mobile behavior
+        video.setAttribute("playsinline", "");
+        observer.observe(video);
+      });
+
+      // Form submission handling
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formStatus = document.getElementById("formStatus");
+          const submitButton = this.querySelector('button[type="submit"]');
+
+          // Show loading state
+          submitButton.textContent = "Sending...";
+          submitButton.disabled = true;
+          formStatus.className = "form-status";
+          formStatus.textContent = "";
+
+          // Prepare email parameters
+          const templateParams = {
+            from_name: document.getElementById("name").value,
+            from_email: document.getElementById("email").value,
+            message: document.getElementById("project").value,
+            to_email: "jk3434048@gmail.com",
+          };
+
+          // Send email using EmailJS
+          emailjs
+            .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            .then(
+              function (response) {
+                formStatus.className = "form-status success";
+                formStatus.textContent =
+                  "Message sent successfully! I'll get back to you soon.";
+                document.getElementById("contactForm").reset();
+                submitButton.textContent = "Submit";
+                submitButton.disabled = false;
+              },
+              function (error) {
+                formStatus.className = "form-status error";
+                formStatus.textContent =
+                  "Failed to send message. Please try again or contact me directly at jk3434048@gmail.com";
+                submitButton.textContent = "Submit";
+                submitButton.disabled = false;
+              }
+            );
+        });
+    </script>
+  </body>
+</html>
